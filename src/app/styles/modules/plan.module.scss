@@ -1,0 +1,71 @@
+.plans {
+  display: flex;
+  gap: 1.12rem;
+}
+
+.plan {
+  // flex-1 flex flex-col gap-6 py-6 px-[1.12rem] border border-solid border-[#E8E8E8] bg-[#FAFAFA]
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem 1.12rem;
+  border: 1px solid #e8e8e8;
+  background-color: #fafafa;
+  header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  h2 {
+    font-size: 1.875rem;
+    font-weight: 500;
+    span {
+      font-size: 0.875rem;
+      font-weight: 400;
+    }
+  }
+  ul {
+    // flex flex-col gap-2
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    li {
+      display: flex;
+      gap: 0.25rem;
+      align-items: center;
+      span {
+        color: #7d828e;
+      }
+    }
+  }
+  button {
+    padding: 0.5rem 0.62rem;
+    display: flex;
+    gap: 0.5rem;
+    background-color: #fff;
+    border: 1px solid #e8e8e8;
+    align-items: center;
+    span {
+      color: black;
+    }
+  }
+}
+.selected {
+  background-color: #233137;
+  border-color: transparent;
+  svg path {
+    stroke: white;
+  }
+  color: white;
+  h4 {
+    color: white;
+  }
+  button {
+    background-color: transparent;
+    border-color: rgba(232, 232, 232, 0.2);
+    span {
+      color: rgba(255, 255, 255);
+    }
+  }
+}
