@@ -36,9 +36,12 @@ function Steps({
 }
 
 function MyDropzone({ src, setSrc }: { src: string | null; setSrc: any }) {
-  const onDrop = useCallback((e: any) => {
-    setSrc(URL.createObjectURL(e[0]));
-  }, []);
+  const onDrop = useCallback(
+    (e: any) => {
+      setSrc(URL.createObjectURL(e[0]));
+    },
+    [setSrc]
+  );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (

@@ -55,7 +55,7 @@ const Welcome = ({ next }: { next: () => void }) => {
           <span className="font-denton font-light">few questions</span>
         </h1>
         <span className="text-xl text-tGray">
-          Don't worry, this process doesn&apos;t take long
+          Don&apos;t worry, this process doesn&apos;t take long
         </span>
       </div>
       <button
@@ -307,7 +307,7 @@ const UserBDate = ({ next }: { next: () => void }) => {
 const UserGender = ({ next }: { next: () => void }) => {
   const { user, setUser } = store();
 
-  const [gender, setGender] = useState();
+  const [gender, setGender] = useState<string | undefined>();
   const [filled, setFilled] = useState(false);
   useEffect(() => {
     if (gender) setFilled(true);

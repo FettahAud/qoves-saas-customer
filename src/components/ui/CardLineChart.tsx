@@ -28,7 +28,7 @@ export default function CardLineChart({
       grade.addColorStop(index, step);
     });
     setGradient(grade);
-  }, []);
+  }, [setGradient, gradientSteps]);
   return (
     <div className="chart-wrapper h-[11.68rem] w-full">
       <Line

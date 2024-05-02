@@ -41,7 +41,7 @@ export default function SingleCustomerDataTable() {
     table.getColumn("name")?.toggleVisibility(false);
     table.getColumn("email")?.toggleVisibility(false);
     table.setPageSize(5);
-  }, []);
+  }, [table]);
 
   return (
     <>

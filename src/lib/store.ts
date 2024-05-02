@@ -18,7 +18,7 @@ type Store = {
     lastName: string;
     country: string;
     bDate: Date | undefined;
-    identify: "male" | "female" | "other" | null;
+    identify: string | undefined;
     racialGroup: string;
     email: string;
     password: string | undefined;
@@ -28,7 +28,7 @@ type Store = {
     lastName: string;
     country: string;
     bDate: Date | undefined;
-    identify: "male" | "female" | "other" | null;
+    identify: string | undefined;
     racialGroup: string;
     email: string;
     password: string | undefined;
@@ -53,7 +53,7 @@ const store = create<Store>()((set) => ({
     lastName: "",
     country: "",
     bDate: undefined,
-    identify: null,
+    identify: undefined,
     racialGroup: "",
     email: "",
     password: undefined,
