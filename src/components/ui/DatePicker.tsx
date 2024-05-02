@@ -87,3 +87,46 @@ export function DatePickerWithRange({
     </div>
   );
 }
+
+export function DatePicker({
+  className,
+  hideIcon = false,
+  placeholder = "Pick a date",
+  icon,
+  date,
+  setDate,
+}: {
+  className?: string;
+  hideIcon?: boolean;
+  placeholder?: string;
+  icon?: React.ReactNode;
+  date: Date | undefined;
+  setDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+}) {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant={"outline"}
+          className={cn(
+            "w-[280px] justify-start text-left font-normal",
+            !date && "text-muted-foreground",
+            className
+          )}
+        >
+          {!hideIcon && <CalendarIcon className="mr-2 h-4 w-4" />}
+          {date ? format(date, "PPP") : <span>{placeholder}</span>}
+          {icon}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0">
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={setDate}
+          initialFocus
+        />
+      </PopoverContent>
+    </Popover>
+  );
+}

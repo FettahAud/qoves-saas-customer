@@ -14,14 +14,24 @@ type Store = {
   login: () => void;
   logout: () => void;
   user: {
-    fullName: string;
+    firstName: string;
+    lastName: string;
+    country: string;
+    bDate: Date | undefined;
+    identify: "male" | "female" | "other" | null;
+    racialGroup: string;
     email: string;
-    password: string;
+    password: string | undefined;
   };
   setUser: (user: {
-    fullName: string;
+    firstName: string;
+    lastName: string;
+    country: string;
+    bDate: Date | undefined;
+    identify: "male" | "female" | "other" | null;
+    racialGroup: string;
     email: string;
-    password: string;
+    password: string | undefined;
   }) => void;
 };
 
@@ -35,13 +45,18 @@ const store = create<Store>()((set) => ({
   toggleModal: (modal) =>
     set(() => ({ modalState: true, selectedModal: modal })),
   closeModal: () => set(() => ({ modalState: false, selectedModal: null })),
-  loggedIn: true,
+  loggedIn: false,
   login: () => set({ loggedIn: true }),
   logout: () => set({ loggedIn: false }),
   user: {
-    fullName: "",
+    firstName: "",
+    lastName: "",
+    country: "",
+    bDate: undefined,
+    identify: null,
+    racialGroup: "",
     email: "",
-    password: "",
+    password: undefined,
   },
   setUser: (user) => set({ user }),
 }));
