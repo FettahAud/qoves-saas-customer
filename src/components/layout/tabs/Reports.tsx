@@ -30,7 +30,7 @@ const reports: ReportProps[] = [
   },
   {
     title: "Facial Morph Report",
-    state: "Report Delivered",
+    state: "In Review",
     date: "February 24, 2024",
     des: "Enim bibendum pharetra nisl diam maecenas. At ultrices libero lectus enim.",
     email: "saadmahmud@gmail.com",
@@ -39,7 +39,7 @@ const reports: ReportProps[] = [
   },
   {
     title: "Facial Morph Report",
-    state: "Report Delivered",
+    state: "Image Not Submitted",
     date: "February 24, 2024",
     des: "Enim bibendum pharetra nisl diam maecenas. At ultrices libero lectus enim.",
     email: "saadmahmud@gmail.com",
@@ -48,7 +48,7 @@ const reports: ReportProps[] = [
   },
   {
     title: "Facial Morph Report",
-    state: "Report Delivered",
+    state: "Consultation Meeting Scheduled",
     date: "February 24, 2024",
     des: "Enim bibendum pharetra nisl diam maecenas. At ultrices libero lectus enim.",
     email: "saadmahmud@gmail.com",
@@ -80,7 +80,22 @@ const Report = ({ state, title, des, date, email, img }: ReportProps) => {
     <div className="report basis-1/2">
       <div className="p-6 flex gap-6 justify-between">
         <div className="flex flex-col gap-4">
-          <div className="state">{state}</div>
+          <div
+            className={`
+              state custom-list-item table-list-item 
+              p-[.12rem] pl-[1.25rem] pr-[.38rem] w-max 
+              text-xs
+              ${
+                state === "Report Delivered"
+                  ? "bg-[#0c68260d] text-[#0C6826] before:bg-[#0C6826] "
+                  : state === "Image Not Submitted"
+                  ? "bg-[#680C0C0D] text-[#BB3030] before:bg-[#BB3030]"
+                  : "bg-[#EB850A0D] text-[#EB850A] before:bg-[#EB850A]"
+              }
+          `}
+          >
+            {state}
+          </div>
           <div className="title flex flex-col gap-2 flex-1">
             <h1 className="text-2xl font-medium">{title}</h1>
             <p className="text-sm text-tGray">{des}</p>
