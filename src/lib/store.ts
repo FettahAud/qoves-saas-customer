@@ -38,14 +38,14 @@ type Store = {
 const store = create<Store>()((set) => ({
   sidebarState: true,
   toggleSidebar: () => set((state) => ({ sidebarState: !state.sidebarState })),
-  sidebarTab: "overview",
+  sidebarTab: "reports",
   setSidebarTab: (tab: sidebarTabId) => set({ sidebarTab: tab }),
   modalState: false,
   selectedModal: null,
   toggleModal: (modal) =>
     set(() => ({ modalState: true, selectedModal: modal })),
   closeModal: () => set(() => ({ modalState: false, selectedModal: null })),
-  loggedIn: false,
+  loggedIn: true,
   login: () => set({ loggedIn: true }),
   logout: () => set({ loggedIn: false }),
   user: {

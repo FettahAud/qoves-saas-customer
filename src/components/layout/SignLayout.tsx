@@ -617,7 +617,7 @@ const SignUp = ({ step, next }: { step: number; next: () => void }) => {
 };
 
 export default function SignLayout() {
-  const [step, setStep] = useState(6);
+  const [step, setStep] = useState(0);
   const [hide, setHide] = useState(false);
   const next = () => setStep(step + 1);
   useGSAP(

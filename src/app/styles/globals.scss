@@ -314,7 +314,11 @@ h3.title + span.des {
   top: 0;
   left: 0;
   width: 21.625rem;
-  @apply transition-[width];
+  transition: width 0.3s linear;
+
+  .small-title {
+    overflow: hidden;
+  }
 
   .list {
     gap: 0.25rem;
