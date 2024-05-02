@@ -854,3 +854,26 @@ table thead tr {
   position: absolute;
   // justify-content: flex-end;
 }
+
+.reports-wrapper {
+  .report {
+    border-bottom: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+    &:nth-child(4n + 1) {
+      position: relative;
+      &::before,
+      &::after {
+        content: "";
+        width: 1px;
+        height: 12px;
+        background-color: #7d828e;
+        position: absolute;
+        top: calc(100% - 6px);
+        left: 100%;
+      }
+      &::after {
+        rotate: 90deg;
+      }
+    }
+  }
+}
