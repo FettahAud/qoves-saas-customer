@@ -300,7 +300,7 @@ export const columns: ColumnDef<Client>[] = [
       return (
         <Button
           className="but but-table"
-          onClick={() => setSidebarTab("customer-information")}
+          // onClick={() => setSidebarTab("")}
         >
           <span>{row.original.action}</span>
           <div className="vertical-sep"></div>

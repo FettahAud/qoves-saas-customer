@@ -45,7 +45,7 @@ const store = create<Store>()((set) => ({
   toggleModal: (modal) =>
     set(() => ({ modalState: true, selectedModal: modal })),
   closeModal: () => set(() => ({ modalState: false, selectedModal: null })),
-  loggedIn: true,
+  loggedIn: false,
   login: () => set({ loggedIn: true }),
   logout: () => set({ loggedIn: false }),
   user: {
