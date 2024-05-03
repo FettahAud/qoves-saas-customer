@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import img1 from "@/../public/images/1.png";
 import img2 from "@/../public/images/2.png";
@@ -46,16 +46,16 @@ const reports: ReportProps[] = [
     img: img2,
     file: "",
   },
-  {
-    title: "Facial Morph Report",
-    state: "Image Not Submitted",
-    type: "needSubmission",
-    date: "February 24, 2024",
-    des: "Enim bibendum pharetra nisl diam maecenas. At ultrices libero lectus enim.",
-    email: "saadmahmud@gmail.com",
-    img: img3,
-    file: "",
-  },
+  // {
+  //   title: "Facial Morph Report",
+  //   state: "Image Not Submitted",
+  //   type: "needSubmission",
+  //   date: "February 24, 2024",
+  //   des: "Enim bibendum pharetra nisl diam maecenas. At ultrices libero lectus enim.",
+  //   email: "saadmahmud@gmail.com",
+  //   img: img3,
+  //   file: "",
+  // },
   {
     title: "Facial Morph Report",
     state: "Consultation Meeting Scheduled",
@@ -91,7 +91,7 @@ const reports: ReportProps[] = [
 const Report = ({ state, title, des, date, email, img }: ReportProps) => {
   return (
     <div className="report basis-1/2">
-      <div className="p-6 flex gap-6 justify-between">
+      <div className="p-6 flex gap-6 justify-between h-[22rem]">
         <div className="flex flex-col gap-4">
           <div
             className={`
@@ -227,8 +227,50 @@ const Report = ({ state, title, des, date, email, img }: ReportProps) => {
             </svg>
           </button>
         </div>
-        <Image alt="pp" src={img} />
+        <Image alt="pp" className="w-auto" src={img} />
       </div>
+    </div>
+  );
+};
+
+const EmptyReport = () => {
+  const plusIcon = (
+    <svg
+      className="w-[3.125rem] h-[3.125rem]"
+      viewBox="0 0 50 50"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        opacity="0.4"
+        cx="25"
+        cy="25.1797"
+        r="24"
+        stroke="#7D828E"
+        stroke-dasharray="3 3"
+      />
+      <mask
+        id="mask0_2210_25724"
+        style={{ maskType: "alpha" }}
+        maskUnits="userSpaceOnUse"
+        x="13"
+        y="13"
+        width="24"
+        height="25"
+      >
+        <rect x="13" y="13.6416" width="24" height="24" fill="#D9D9D9" />
+      </mask>
+      <g mask="url(#mask0_2210_25724)">
+        <path
+          d="M24.3717 26.2708H18.5V25.0143H24.3717V19.1426H25.6282V25.0143H31.5V26.2708H25.6282V32.1426H24.3717V26.2708Z"
+          fill="#7D828E"
+        />
+      </g>
+    </svg>
+  );
+  return (
+    <div className="report empty-report basis-1/2 h-[22rem] flex items-center justify-center">
+      <button className="border-none bg-none">{plusIcon}</button>
     </div>
   );
 };
@@ -255,21 +297,94 @@ function ReportsTabs({ changeType }: { changeType: Function }) {
 
 export default function Reports() {
   const [type, setType] = useState("all");
+  const [times, setTimes] = useState(0);
   const changeType = (e: string) => {
     setType(e);
   };
+  const [fReports, setReports] = useState(reports);
+  useEffect(() => {
+    if (type === "all") {
+      setReports(reports);
+    } else {
+      setReports(reports.filter((report) => report.type === type));
+    }
+  }, [type]);
+  useEffect(() => {
+    switch (fReports.length % 4) {
+      case 0:
+        setTimes(0);
+        break;
+      case 1:
+        setTimes(3);
+        break;
+      case 2:
+        setTimes(2);
+        break;
+      case 3:
+        setTimes(1);
+        break;
+    }
+  }, [fReports]);
   return (
     <div className="flex flex-col gap-6">
       <ReportsTabs changeType={changeType} />
       <div className="reports-wrapper flex flex-wrap border-t border-l">
-        {reports
-          .filter((report) => {
-            if (type === "all") return true;
-            return report.type === type;
-          })
-          .map((report, index) => (
-            <Report key={index} {...report} />
-          ))}
+        {fReports.length > 0 ? (
+          fReports.map((report, i) => <Report key={i} {...report} />)
+        ) : (
+          <div className="w-full h-[45rem] flex items-center justify-center gap-8 flex-col border-r border-b">
+            <svg
+              width="120"
+              height="121"
+              viewBox="0 0 120 121"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                opacity="0.4"
+                cx="70"
+                cy="50.7186"
+                r="47.8602"
+                stroke="#7D828E"
+              />
+              <circle
+                opacity="0.4"
+                cx="49.8602"
+                cy="71.0789"
+                r="47.8602"
+                stroke="#7D828E"
+                stroke-dasharray="3 3"
+              />
+              <mask
+                id="mask0_2209_25375"
+                style={{ maskType: "alpha" }}
+                maskUnits="userSpaceOnUse"
+                x="40"
+                y="41"
+                width="40"
+                height="41"
+              >
+                <rect
+                  x="40"
+                  y="41.2188"
+                  width="40"
+                  height="40"
+                  fill="#D9D9D9"
+                />
+              </mask>
+              <g mask="url(#mask0_2209_25375)">
+                <path
+                  d="M73.3334 70.3873L71.9231 68.977V52.5945H65.2222V45.962H52.5641V49.3936L51.1539 47.9834V44.5518H65.9274L73.3334 51.9578V70.3873ZM52.5641 70.321H67.0812L52.5641 55.8039V70.321ZM74.5983 77.8381L68.4915 71.7313H51.1539V54.3936L43.3868 46.6265L44.3974 45.6158L75.609 76.8274L74.5983 77.8381ZM45 77.8851V55.712H46.4103V76.4748H65.4787V77.8851H45Z"
+                  fill="#7D828E"
+                />
+              </g>
+            </svg>
+            <span className="font-zagma text-sm text-tGray">No Data Found</span>
+          </div>
+        )}
+        {[...Array(times)].map((_, i) => (
+          <EmptyReport key={i} />
+        ))}
       </div>
     </div>
   );
