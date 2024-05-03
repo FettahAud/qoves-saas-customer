@@ -1,8 +1,14 @@
+"use client";
 import Image from "next/image";
+import { useRef, useState } from "react";
+
 import img1 from "@/../public/images/1.png";
 import img2 from "@/../public/images/2.png";
 import img3 from "@/../public/images/3.png";
 import img4 from "@/../public/images/4.png";
+
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 type ReportProps = {
   // img: image type
   img: typeof img1;
@@ -11,6 +17,7 @@ type ReportProps = {
     | "In Review"
     | "Consultation Meeting Scheduled"
     | "Image Not Submitted";
+  type: "finished" | "inProcess" | "needSubmission";
   title: string;
   des: string;
   date: string;
@@ -22,6 +29,7 @@ const reports: ReportProps[] = [
   {
     title: "Facial Morph Report",
     state: "Report Delivered",
+    type: "finished",
     date: "February 24, 2024",
     des: "Enim bibendum pharetra nisl diam maecenas. At ultrices libero lectus enim.",
     email: "saadmahmud@gmail.com",
@@ -31,6 +39,7 @@ const reports: ReportProps[] = [
   {
     title: "Facial Morph Report",
     state: "In Review",
+    type: "inProcess",
     date: "February 24, 2024",
     des: "Enim bibendum pharetra nisl diam maecenas. At ultrices libero lectus enim.",
     email: "saadmahmud@gmail.com",
@@ -40,6 +49,7 @@ const reports: ReportProps[] = [
   {
     title: "Facial Morph Report",
     state: "Image Not Submitted",
+    type: "needSubmission",
     date: "February 24, 2024",
     des: "Enim bibendum pharetra nisl diam maecenas. At ultrices libero lectus enim.",
     email: "saadmahmud@gmail.com",
@@ -49,6 +59,7 @@ const reports: ReportProps[] = [
   {
     title: "Facial Morph Report",
     state: "Consultation Meeting Scheduled",
+    type: "inProcess",
     date: "February 24, 2024",
     des: "Enim bibendum pharetra nisl diam maecenas. At ultrices libero lectus enim.",
     email: "saadmahmud@gmail.com",
@@ -58,6 +69,7 @@ const reports: ReportProps[] = [
   {
     title: "Facial Morph Report",
     state: "Report Delivered",
+    type: "finished",
     date: "February 24, 2024",
     des: "Enim bibendum pharetra nisl diam maecenas. At ultrices libero lectus enim.",
     email: "saadmahmud@gmail.com",
@@ -67,6 +79,7 @@ const reports: ReportProps[] = [
   {
     title: "Facial Morph Report",
     state: "Report Delivered",
+    type: "finished",
     date: "February 24, 2024",
     des: "Enim bibendum pharetra nisl diam maecenas. At ultrices libero lectus enim.",
     email: "saadmahmud@gmail.com",
@@ -220,23 +233,43 @@ const Report = ({ state, title, des, date, email, img }: ReportProps) => {
   );
 };
 
-export default function Reports() {
+function ReportsTabs({ changeType }: { changeType: Function }) {
+  const tabsRef = useRef(null);
+
   return (
-    <div className="">
-      {/* <div className="header"></div> */}
+    <Tabs
+      ref={tabsRef}
+      defaultValue="all"
+      onValueChange={(e) => changeType(e)}
+      className="h-11"
+    >
+      <TabsList className="h-full rounded-none">
+        <TabsTrigger value="all">All Reports</TabsTrigger>
+        <TabsTrigger value="needSubmission">Need Submission</TabsTrigger>
+        <TabsTrigger value="inProcess">In Process</TabsTrigger>
+        <TabsTrigger value="finished">Finished</TabsTrigger>
+      </TabsList>
+    </Tabs>
+  );
+}
+
+export default function Reports() {
+  const [type, setType] = useState("all");
+  const changeType = (e: string) => {
+    setType(e);
+  };
+  return (
+    <div className="flex flex-col gap-6">
+      <ReportsTabs changeType={changeType} />
       <div className="reports-wrapper flex flex-wrap border-t border-l">
-        {reports.map((report, i) => (
-          <Report
-            key={i}
-            title={report.title}
-            state={report.state}
-            date={report.date}
-            des={report.des}
-            email={report.email}
-            img={report.img}
-            file={report.file}
-          />
-        ))}
+        {reports
+          .filter((report) => {
+            if (type === "all") return true;
+            return report.type === type;
+          })
+          .map((report, index) => (
+            <Report key={index} {...report} />
+          ))}
       </div>
     </div>
   );
